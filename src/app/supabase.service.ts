@@ -37,6 +37,21 @@ export class SupabaseService {
 
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
         this.user.next(session!.user);
+
+        //save user to db
+        const user = session!.user;
+        console.log(user);
+        const res = this.updateProfile({
+          id: user?.id,
+          avatar_url: user?.user_metadata['avatar_url'],
+          username: user?.user_metadata['name'],
+          website: '',
+        });
+        res.then((res) => {
+          console.log('completed');
+          console.log(res);
+        });
+
         // this.router.navigate(['/dashboard']);
       } else {
         this.user.next(null);
