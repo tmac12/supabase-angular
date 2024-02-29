@@ -25,12 +25,13 @@ export class GoogleAuthComponent implements OnInit {
       console.log(data);
       const user = this.supabaseService.user.value;
       console.log(user);
-      this.supabaseService.updateProfile({
-        id: user?.id,
-        avatar_url: user?.user_metadata['avatar_url'],
-        username: user?.user_metadata['name'],
-        website: '',
-      });
+      // this.supabaseService.updateProfile({
+      //   id: user?.id,
+      //   avatar_url: user?.user_metadata['avatar_url'],
+      //   username: user?.user_metadata['name'],
+      //   website: '',
+      //   provider_refresh_token:
+      // });
     } else console.error(error);
   }
 }

@@ -15,6 +15,7 @@ export interface Profile {
   username: string;
   website: string;
   avatar_url: string;
+  provider_refresh_token: string | null | undefined;
 }
 
 @Injectable({
@@ -46,6 +47,7 @@ export class SupabaseService {
           avatar_url: user?.user_metadata['avatar_url'],
           username: user?.user_metadata['name'],
           website: '',
+          provider_refresh_token: session?.provider_refresh_token,
         });
         res.then((res) => {
           console.log('completed');
@@ -84,6 +86,7 @@ export class SupabaseService {
     return this.supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
+        scopes: 'https://www.googleapis.com/auth/calendar',
         queryParams: {
           access_type: 'offline',
           prompt: 'consent',
