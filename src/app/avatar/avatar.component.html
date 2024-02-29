@@ -1,14 +1,19 @@
-<div>
-  @if (avatarUrl()) {
+<div></div>
 
-  <img
-    [src]="avatarUrl()"
-    alt="Avatar"
-    class="avatar image"
-    style="height: 150px; width: 150px"
-  />
-  } @else {
+<div class="avatar">
+  <div class="w-24 rounded">
+    @if (avatarUrl()) {
 
-  <div class="avatar no-image" style="height: 150px; width: 150px"></div>
-  }
+    <img
+      [src]="avatarUrl()"
+      alt="Avatar"
+      class="avatar image"
+      style="height: 150px; width: 150px"
+    />
+    } @else {
+
+    <div class="avatar no-image" style="height: 150px; width: 150px"></div>
+    }
+    <!-- <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" /> -->
+  </div>
 </div>
