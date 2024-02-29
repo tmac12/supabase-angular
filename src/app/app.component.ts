@@ -4,6 +4,7 @@ import { GoogleAuthComponent } from './google-auth/google-auth.component';
 import { GoogleCalendarComponent } from './google-calendar/google-calendar.component';
 import { SupabaseService } from './supabase.service';
 import { AccountComponent } from './account/account.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import { AccountComponent } from './account/account.component';
     GoogleAuthComponent,
     GoogleCalendarComponent,
     AccountComponent,
+    LoginFormComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
