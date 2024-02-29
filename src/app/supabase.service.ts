@@ -38,21 +38,23 @@ export class SupabaseService {
 
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
         this.user.next(session!.user);
-
-        //save user to db
-        const user = session!.user;
-        console.log(user);
-        const res = this.updateProfile({
-          id: user?.id,
-          avatar_url: user?.user_metadata['avatar_url'],
-          username: user?.user_metadata['name'],
-          website: '',
-          provider_refresh_token: session?.provider_refresh_token,
-        });
-        res.then((res) => {
-          console.log('completed');
-          console.log(res);
-        });
+        if (event === 'SIGNED_IN') {
+          console.log('save user to db');
+          //save user to db
+          const user = session!.user;
+          console.log(user);
+          const res = this.updateProfile({
+            id: user?.id,
+            avatar_url: user?.user_metadata['avatar_url'],
+            username: user?.user_metadata['name'],
+            website: '',
+            provider_refresh_token: session?.provider_refresh_token,
+          });
+          res.then((res) => {
+            console.log('completed');
+            console.log(res);
+          });
+        }
 
         // this.router.navigate(['/dashboard']);
       } else {
@@ -71,7 +73,7 @@ export class SupabaseService {
   profile(user: User) {
     return this.supabase
       .from('profiles')
-      .select(`username, website, avatar_url`)
+      .select(`username, website, avatar_url, provider_refresh_token`)
       .eq('id', user.id)
       .single();
   }

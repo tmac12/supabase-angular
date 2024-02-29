@@ -1,2 +1,7 @@
-<app-google-auth></app-google-auth>
+@if (session) {
+<app-account></app-account>
 <app-google-calendar></app-google-calendar>
+} @else {
+
+<app-google-auth></app-google-auth>
+}

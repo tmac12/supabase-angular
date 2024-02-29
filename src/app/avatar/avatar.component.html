@@ -1,0 +1,14 @@
+<div>
+  @if (avatarUrl()) {
+
+  <img
+    [src]="avatarUrl()"
+    alt="Avatar"
+    class="avatar image"
+    style="height: 150px; width: 150px"
+  />
+  } @else {
+
+  <div class="avatar no-image" style="height: 150px; width: 150px"></div>
+  }
+</div>
