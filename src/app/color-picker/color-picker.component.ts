@@ -2,10 +2,11 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  OnInit,
   ViewChild,
+  inject,
   signal,
 } from '@angular/core';
+import { ShiftService } from '../shifts/shift.service';
 
 @Component({
   selector: 'app-color-picker',
@@ -20,6 +21,7 @@ export class ColorPickerComponent implements AfterViewInit {
     | undefined;
   @ViewChild('colorDisplay') colorDisplay: ElementRef | undefined;
   @ViewChild('colorPreviewBtn') colorPreviewBtn: ElementRef | undefined;
+  private readonly shiftService = inject(ShiftService);
 
   selectedColor = signal<string | undefined>('red');
 
@@ -28,6 +30,7 @@ export class ColorPickerComponent implements AfterViewInit {
     this.colorPickerInput?.nativeElement.addEventListener('change', () => {
       const chosenColor = this.colorPickerInput?.nativeElement.value;
       this.selectedColor.set(chosenColor);
+      this.shiftService.updateColor(chosenColor ?? '');
       // if (this.colorDisplay)
       //   this.colorDisplay.nativeElement.style.backgroundColor = chosenColor;
     });
