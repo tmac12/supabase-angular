@@ -9,6 +9,7 @@ import {
 } from '@supabase/supabase-js';
 import { environment } from '../environments/environment';
 import { BehaviorSubject } from 'rxjs';
+import { Shift } from './models/shift';
 
 export interface Profile {
   id?: string;
@@ -120,5 +121,14 @@ export class SupabaseService {
 
   uploadAvatar(filePath: string, file: File) {
     return this.supabase.storage.from('avatars').upload(filePath, file);
+  }
+
+  updateShift(shift: Shift) {
+    const update = {
+      ...shift,
+      updated_at: new Date(),
+    };
+
+    return this.supabase.from('shifts').upsert(update);
   }
 }

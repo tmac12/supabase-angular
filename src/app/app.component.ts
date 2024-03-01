@@ -6,6 +6,7 @@ import { SupabaseService } from './supabase.service';
 import { AccountComponent } from './account/account.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { ColorPickerComponent } from './color-picker/color-picker.component';
+import { ShiftEditorComponent } from './shifts/shift-editor/shift-editor.component';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ import { ColorPickerComponent } from './color-picker/color-picker.component';
     AccountComponent,
     LoginFormComponent,
     ColorPickerComponent,
+    ShiftEditorComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
