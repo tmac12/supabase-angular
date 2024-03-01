@@ -1,0 +1,9 @@
+<div class="input-group">
+  <input #colorPickerInput type="color" class="input input-bordered w-full" />
+  <button id="color-preview-btn" class="btn btn-primary">Preview</button>
+</div>
+<div
+  id="color-display"
+  class="w-20 h-20 rounded-full bg-gray-200"
+  [style.background-color]="selectedColor()"
+></div>

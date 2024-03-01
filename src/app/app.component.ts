@@ -5,6 +5,7 @@ import { GoogleCalendarComponent } from './google-calendar/google-calendar.compo
 import { SupabaseService } from './supabase.service';
 import { AccountComponent } from './account/account.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { ColorPickerComponent } from './color-picker/color-picker.component';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
     GoogleCalendarComponent,
     AccountComponent,
     LoginFormComponent,
+    ColorPickerComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
