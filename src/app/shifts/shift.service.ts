@@ -1,10 +1,14 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Shift } from '../models/shift';
+import { SupabaseService } from '../supabase.service';
+import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShiftService {
+  supabase = inject(SupabaseService);
+
   currentShift = signal<Shift>({
     name: '',
     color: '',
@@ -23,5 +27,17 @@ export class ShiftService {
       shift.color = color;
       return shift;
     });
+  }
+
+  getShiftsObservable() {
+    const promise = this.supabase.getShifts();
+    const observable = from(promise);
+    return observable;
+  }
+
+  async getShiftsPromise() {
+    const { data, error } = await this.supabase.getShifts();
+    if (error) console.error(error);
+    return data;
   }
 }

@@ -123,6 +123,7 @@ export class SupabaseService {
     return this.supabase.storage.from('avatars').upload(filePath, file);
   }
 
+  /** Shifts */
   updateShift(shift: Shift) {
     const update = {
       ...shift,
@@ -130,5 +131,9 @@ export class SupabaseService {
     };
 
     return this.supabase.from('shifts').upsert(update);
+  }
+
+  getShifts() {
+    return this.supabase.from('shifts').select().returns<Shift[]>();
   }
 }
