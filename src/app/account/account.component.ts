@@ -12,14 +12,7 @@ import { Router } from '@angular/router';
   styleUrl: './account.component.scss',
 })
 export default class AccountComponent implements OnInit {
-  private readonly supabase = inject(SupabaseService);
   private readonly accountService = inject(AccountService);
-  private readonly router = inject(Router);
-
-  session = this.supabase.session;
-  loading = signal(false);
-  //avatarUrl = signal('');
-  //profile = signal<Profile | undefined | null>(undefined);
   profile = this.accountService.profile;
 
   avatarUrl = computed(() => {
@@ -29,40 +22,10 @@ export default class AccountComponent implements OnInit {
   });
 
   async ngOnInit(): Promise<void> {
-    this.supabase.user.value?.app_metadata.provider;
-    await this.getProfile();
+    await this.accountService.getProfile();
   }
 
   async signOut() {
-    await this.supabase.signOut();
-    this.router.navigate(['/login']);
-  }
-
-  async getProfile() {
-    try {
-      this.loading.set(true);
-      if (!this.session) {
-        console.error('no session');
-        return;
-      }
-      const { user } = this.session;
-      this.accountService.userId.set(user.id);
-      let { data: profile, error, status } = await this.supabase.profile(user);
-
-      if (error && status !== 406) {
-        throw error;
-      }
-
-      if (profile) {
-        this.accountService.profile.set(profile);
-        //this.profile.set(profile);
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        alert(error.message);
-      }
-    } finally {
-      this.loading.set(false);
-    }
+    this.accountService.signOut();
   }
 }

@@ -37,15 +37,12 @@
       </div>
     </div>
     <div class="dropdown dropdown-end">
-      <app-account></app-account>
-      <!-- <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+      <!-- <app-account></app-account> -->
+      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
-          <img
-            alt="Tailwind CSS Navbar component"
-            src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-          />
+          <img alt="Tailwind CSS Navbar component" [src]="avatarUrl()" />
         </div>
-      </div> -->
+      </div>
       <ul
         tabindex="0"
         class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
@@ -57,7 +54,16 @@
           </a>
         </li>
         <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
+        <li>
+          <!-- <a>Logout</a> -->
+          <button
+            (click)="signOut()"
+            class="btn btn-outline btn-error me-2"
+            type="button"
+          >
+            Logout
+          </button>
+        </li>
       </ul>
     </div>
   </div>
