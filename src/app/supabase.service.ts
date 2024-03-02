@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import {
   AuthChangeEvent,
   AuthSession,
@@ -25,6 +25,7 @@ export interface Profile {
 export class SupabaseService {
   private supabase: SupabaseClient;
   _session: AuthSession | null = null;
+  sessionSignal = signal<AuthSession | null>(null);
   user = new BehaviorSubject<User | null>(null);
 
   constructor() {
@@ -36,6 +37,7 @@ export class SupabaseService {
     this.supabase.auth.onAuthStateChange((event, session) => {
       console.log(event);
       console.log(session);
+      this.sessionSignal.set(session);
 
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
         this.user.next(session!.user);
@@ -69,6 +71,11 @@ export class SupabaseService {
       this._session = data.session;
     });
     return this._session;
+  }
+
+  async getUser() {
+    const user = await this.supabase.auth.getUser();
+    return user;
   }
 
   profile(user: User) {

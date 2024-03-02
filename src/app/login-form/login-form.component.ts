@@ -8,4 +8,4 @@ import { GoogleAuthComponent } from '../google-auth/google-auth.component';
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
 })
-export class LoginFormComponent {}
+export default class LoginFormComponent {}

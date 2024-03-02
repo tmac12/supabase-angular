@@ -1,8 +1,14 @@
-@if (session) {
-<app-shift-editor></app-shift-editor>
+<router-outlet></router-outlet>
+@if(isAuthenticated()){
+<div>AUTH</div>
+} @else {
+<div>NOT AUTH</div>
+} @if (session) {
+
+<!-- <app-shift-editor></app-shift-editor>
 <app-shift-list></app-shift-list>
 <app-account></app-account>
-<app-google-calendar></app-google-calendar>
+<app-google-calendar></app-google-calendar> -->
 } @else {
 <app-login-form></app-login-form>
 

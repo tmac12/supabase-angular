@@ -2,6 +2,7 @@ import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { Profile, SupabaseService } from '../supabase.service';
 import { AvatarComponent } from '../avatar/avatar.component';
 import { AccountService } from './account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -10,9 +11,10 @@ import { AccountService } from './account.service';
   templateUrl: './account.component.html',
   styleUrl: './account.component.scss',
 })
-export class AccountComponent implements OnInit {
+export default class AccountComponent implements OnInit {
   private readonly supabase = inject(SupabaseService);
   private readonly accountService = inject(AccountService);
+  private readonly router = inject(Router);
 
   session = this.supabase.session;
   loading = signal(false);
@@ -31,8 +33,9 @@ export class AccountComponent implements OnInit {
     await this.getProfile();
   }
 
-  signOut() {
-    this.supabase.signOut();
+  async signOut() {
+    await this.supabase.signOut();
+    this.router.navigate(['/login']);
   }
 
   async getProfile() {
