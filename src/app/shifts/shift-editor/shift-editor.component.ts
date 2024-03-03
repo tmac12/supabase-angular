@@ -21,7 +21,7 @@ import { AccountService } from '../../account/account.service';
   templateUrl: './shift-editor.component.html',
   styleUrl: './shift-editor.component.scss',
 })
-export class ShiftEditorComponent implements AfterViewInit {
+export default class ShiftEditorComponent implements AfterViewInit {
   @ViewChild('name') nameInput: ElementRef<HTMLInputElement> | undefined;
 
   supabase = inject(SupabaseService);

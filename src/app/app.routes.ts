@@ -8,6 +8,11 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'addShift',
+    loadComponent: () => import('./shifts/shift-editor/shift-editor.component'),
+    canActivate: [authGuard],
+  },
+  {
     path: 'login',
     loadComponent: () => import('./login-form/login-form.component'),
   },
