@@ -10,6 +10,7 @@ import {
 import { environment } from '../environments/environment';
 import { BehaviorSubject } from 'rxjs';
 import { Shift } from './models/shift';
+import { CalendarEvent } from './models/calendarEvent';
 
 export interface Profile {
   id?: string;
@@ -142,5 +143,19 @@ export class SupabaseService {
 
   getShifts() {
     return this.supabase.from('shifts').select().returns<Shift[]>();
+  }
+
+  /** Events */
+  updateEvent(calendarEvent: CalendarEvent) {
+    const update = {
+      ...calendarEvent,
+      updated_at: new Date(),
+      owner_id: calendarEvent.owner_id ?? this._session?.user.id,
+    };
+    return this.supabase.from('events').upsert(update);
+  }
+
+  getEvents() {
+    return this.supabase.from('events').select().returns<CalendarEvent[]>();
   }
 }
