@@ -1,0 +1,11 @@
+<div>
+  @if (calendarVisible()) {
+
+  <full-calendar [options]="calendarOptions()">
+    <ng-template #eventContent let-arg>
+      <b>{{ arg.timeText }}</b>
+      <i>{{ arg.event.title }}</i>
+    </ng-template>
+  </full-calendar>
+  }
+</div>
