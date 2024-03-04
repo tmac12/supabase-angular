@@ -1,4 +1,11 @@
-import { Component, ElementRef, ViewChild, effect, input } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  effect,
+  input,
+  model,
+} from '@angular/core';
 
 @Component({
   selector: 'app-shift-editor-modal',
@@ -9,7 +16,7 @@ import { Component, ElementRef, ViewChild, effect, input } from '@angular/core';
 })
 export class ShiftEditorModalComponent {
   @ViewChild('modalDialog') myModal: ElementRef | undefined;
-  isVisible = input(false);
+  isVisible = model(false);
 
   constructor() {
     effect(() => {
@@ -18,5 +25,9 @@ export class ShiftEditorModalComponent {
         this.myModal?.nativeElement.showModal();
       }
     });
+  }
+  closeDialog() {
+    this.myModal?.nativeElement.close();
+    this.isVisible.set(false);
   }
 }
