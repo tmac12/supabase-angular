@@ -8,4 +8,14 @@
     </ng-template>
   </full-calendar>
   }
+  <!-- @if (isModalVisible()){ -->
+  <app-shift-editor-modal
+    [isVisible]="isModalVisible()"
+  ></app-shift-editor-modal>
+  <!-- } -->
+
+  <!-- <app-custom-modal
+    [isVisible]="isModalVisible"
+    [message]="modalMessage"
+  ></app-custom-modal> -->
 </div>

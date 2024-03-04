@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import {
   CalendarOptions,
+  DateSelectArg,
   EventApi,
   EventSourceInput,
 } from '@fullcalendar/core';
@@ -10,6 +11,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import { CalendarService } from '../../services/calendar.service';
 import { CalendarEvent } from '../../models/calendarEvent';
 import { options } from '@fullcalendar/core/preact';
+import { CustomModalComponent } from '../../custom-modal/custom-modal.component';
+import { ShiftEditorModalComponent } from '../../shift-editor-modal/shift-editor-modal.component';
 // import timeGridPlugin from '@fullcalendar/timegrid';
 // import listPlugin from '@fullcalendar/list';
 // import { INITIAL_EVENTS, createEventId } from './event-utils';
@@ -17,7 +20,11 @@ import { options } from '@fullcalendar/core/preact';
 @Component({
   selector: 'app-full-calendar-wrapper',
   standalone: true,
-  imports: [FullCalendarModule],
+  imports: [
+    FullCalendarModule,
+    CustomModalComponent,
+    ShiftEditorModalComponent,
+  ],
   templateUrl: './full-calendar-wrapper.component.html',
   styleUrl: './full-calendar-wrapper.component.scss',
 })
@@ -55,6 +62,10 @@ export class FullCalendarWrapperComponent {
   currentEvents = signal<EventApi[]>([]);
 
   handleDateClick(arg: DateClickArg) {
+    this.modalMessage = `You clicked on date: ${arg.dateStr}`;
+    this.isModalVisible.set(true);
+    return;
+
     alert('date click! ' + arg.dateStr);
     const fakeEvent: CalendarEvent = {
       created_at: new Date(),
@@ -109,5 +120,37 @@ export class FullCalendarWrapperComponent {
       // });
       // this.currentEvents.set(eventsApi);
     });
+  }
+
+  private eventGuid = 0;
+
+  isModalVisible = signal(false);
+  modalMessage: string = '';
+
+  createEventId() {
+    return String(this.eventGuid++);
+  }
+
+  //Thanks to: https://github.com/fullcalendar/fullcalendar-examples/blob/main/angular17/src/app/app.component.ts#L42
+  handleDateSelect(selectInfo: DateSelectArg) {
+    const title = prompt('Please enter a new title for your event');
+    const calendarApi = selectInfo.view.calendar;
+
+    calendarApi.unselect(); // clear date selection
+
+    if (title) {
+      calendarApi.addEvent({
+        id: this.createEventId(),
+        title,
+        start: selectInfo.startStr,
+        end: selectInfo.endStr,
+        allDay: selectInfo.allDay,
+      });
+    }
+  }
+
+  handleEvents(events: EventApi[]) {
+    this.currentEvents.set(events);
+    // this.changeDetector.detectChanges(); // workaround for pressionChangedAfterItHasBeenCheckedError
   }
 }
