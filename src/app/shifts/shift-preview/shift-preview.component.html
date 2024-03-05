@@ -1,0 +1,16 @@
+@if(shift() != null){
+
+<div
+  class="card w-96 text-primary-content"
+  [style.background-color]="shift()?.color"
+>
+  <div class="card-body">
+    <h2 class="card-title">{{ shift()?.name }}</h2>
+    <p>{{ shift()?.start_time }}</p>
+    <p>{{ shift()?.end_time }}</p>
+    <div class="card-actions justify-end">
+      <button class="btn">Buy Now</button>
+    </div>
+  </div>
+</div>
+}

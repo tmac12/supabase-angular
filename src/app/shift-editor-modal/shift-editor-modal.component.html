@@ -1,8 +1,13 @@
 <!-- Open the modal using ID.showModal() method -->
 <dialog id="my_modal_5" #modalDialog class="modal modal-bottom sm:modal-middle">
   <div class="modal-box">
-    <h3 class="font-bold text-lg">Hello!</h3>
+    <!-- <h3 class="font-bold text-lg">Hello!</h3> -->
+    <app-shift-select #shiftSelect></app-shift-select>
     <p class="py-4">Press ESC key or click the button below to close</p>
+    @if(selectedShift()){
+    <app-shift-preview [shift]="selectedShift()"></app-shift-preview>
+    }
+
     <div class="modal-action">
       <form method="dialog">
         <!-- if there is a button in form, it will close the modal -->
