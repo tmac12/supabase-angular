@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ShiftService } from '../shift.service';
 import { AccountService } from '../../account/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shift-editor',
@@ -28,6 +29,7 @@ export default class ShiftEditorComponent implements AfterViewInit {
   shiftService = inject(ShiftService);
   accountService = inject(AccountService);
   currentShift = this.shiftService.currentShift();
+  router = inject(Router);
 
   shiftForm: FormGroup;
   shiftName = signal('');
@@ -76,6 +78,7 @@ export default class ShiftEditorComponent implements AfterViewInit {
     res.then((res) => {
       console.log('shift updated');
       console.log(res);
+      this.router.navigate(['home']);
     });
   }
 }
