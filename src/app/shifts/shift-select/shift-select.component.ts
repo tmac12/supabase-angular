@@ -13,7 +13,6 @@ import { FormsModule } from '@angular/forms';
 export class ShiftSelectComponent {
   shiftService = inject(ShiftService);
   shifts = signal<Shift[] | null>([]);
-  // selectedValue: Shift | null = null;
   selectedValue = model<Shift | null>(null);
 
   constructor() {
