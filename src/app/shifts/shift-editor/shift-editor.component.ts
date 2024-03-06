@@ -31,19 +31,19 @@ export default class ShiftEditorComponent implements AfterViewInit {
 
   shiftForm: FormGroup;
   shiftName = signal('');
-  nameSignal = signal<any | undefined>(undefined);
+  // nameSignal = signal<any | undefined>(undefined);
 
   constructor(private fb: FormBuilder) {
     this.shiftForm = this.fb.group({
       name: [''],
     });
-    const formName = this.shiftForm.get('name');
-    if (formName) {
-      const newName = toSignal(formName.valueChanges, {
-        initialValue: '',
-      });
-      this.nameSignal.set(newName);
-    }
+    // const formName = this.shiftForm.get('name');
+    // if (formName) {
+    //   const newName = toSignal(formName.valueChanges, {
+    //     initialValue: '',
+    //   });
+    //   this.nameSignal.set(newName);
+    // }
   }
   ngAfterViewInit(): void {
     // Represent the 'firstName' form control as a Signal

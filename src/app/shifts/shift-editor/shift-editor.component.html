@@ -1,10 +1,19 @@
-<div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+<div
+  class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 items-center text-center"
+>
+  <h2 class="card-title">
+    Configure your
+
+    <div class="badge badge-secondary">NEW</div>
+    shift
+  </h2>
   <form class="card-body" [formGroup]="shiftForm">
     @if(shiftName()){
-    <div>{{ shiftName() }} wonderful!</div>
-    } @if (nameSignal()) {
-    <div>{{ nameSignal() }} is a great name!</div>
+    <div>{{ shiftName() }} wonderful name!</div>
     }
+    <!-- @if (nameSignal()) {
+    <div>{{ nameSignal() }} is a great name!</div>
+    } -->
     <label class="input input-bordered flex items-center gap-2">
       Name
       <input
