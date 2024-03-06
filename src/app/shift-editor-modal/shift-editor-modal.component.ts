@@ -7,6 +7,7 @@ import {
   effect,
   model,
   signal,
+  viewChild,
 } from '@angular/core';
 import { ShiftSelectComponent } from '../shifts/shift-select/shift-select.component';
 import { Shift } from '../models/shift';
@@ -21,10 +22,12 @@ import { ShiftPreviewComponent } from '../shifts/shift-preview/shift-preview.com
 })
 export class ShiftEditorModalComponent implements AfterViewInit {
   @ViewChild('modalDialog') myModal: ElementRef | undefined;
-  @ViewChild('shiftSelect') shiftSelect: ShiftSelectComponent | undefined;
+  // @ViewChild('shiftSelect') shiftSelect: ShiftSelectComponent | undefined;
+  shiftSelect = viewChild.required<ShiftSelectComponent>('shiftSelect');
+
   isVisible = model(false);
   // selectedShift = signal<Shift | null | undefined>(null);
-  selectedShift = computed(() => this.shiftSelect?.selectedValue());
+  selectedShift = computed(() => this.shiftSelect().selectedValue());
 
   constructor() {
     effect(() => {
@@ -35,7 +38,7 @@ export class ShiftEditorModalComponent implements AfterViewInit {
 
       console.log(
         'selected shift in editor: ' +
-          JSON.stringify(this.shiftSelect?.selectedValue())
+          JSON.stringify(this.shiftSelect().selectedValue())
       );
     });
   }
@@ -43,7 +46,7 @@ export class ShiftEditorModalComponent implements AfterViewInit {
     //this.selectedShift.set(this.shiftSelect?.selectedValue());
   }
   closeDialog() {
-    const selectedValue = this.shiftSelect?.selectedValue();
+    const selectedValue = this.shiftSelect().selectedValue();
     // this.selectedShift.set(selectedValue);
     this.myModal?.nativeElement.close();
     this.isVisible.set(false);
