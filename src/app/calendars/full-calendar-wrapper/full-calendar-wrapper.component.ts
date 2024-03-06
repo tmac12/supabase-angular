@@ -60,9 +60,11 @@ export class FullCalendarWrapperComponent {
     */
   });
   currentEvents = signal<EventApi[]>([]);
+  selectedDate = signal<Date>(new Date());
 
   handleDateClick(arg: DateClickArg) {
     this.modalMessage = `You clicked on date: ${arg.dateStr}`;
+    this.selectedDate.set(arg.date);
     this.isModalVisible.set(true);
     return;
 
