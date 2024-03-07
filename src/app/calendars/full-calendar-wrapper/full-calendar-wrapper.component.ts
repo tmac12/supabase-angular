@@ -9,8 +9,7 @@ import { ShiftEditorModalComponent } from '../../shift-editor-modal/shift-editor
 import { ShiftService } from '../../shifts/shift.service';
 import { JsonPipe } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
-// import timeGridPlugin from '@fullcalendar/timegrid';
-// import listPlugin from '@fullcalendar/list';
+import timeGridPlugin from '@fullcalendar/timegrid';
 
 @Component({
   selector: 'app-full-calendar-wrapper',
@@ -67,16 +66,11 @@ export class FullCalendarWrapperComponent {
   calendarOptionsComputed = computed(() => {
     const calendarEvents = this.calendarEventsComputed();
     const opt: CalendarOptions = {
-      plugins: [
-        interactionPlugin,
-        dayGridPlugin,
-        // timeGridPlugin,
-        // listPlugin,
-      ],
+      plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin],
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay',
       },
       initialView: 'dayGridMonth',
       // initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed

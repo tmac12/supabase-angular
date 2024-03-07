@@ -9,3 +9,11 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 # Google Calendars
 
 To get google calendars use project [xeora-backend](https://github.com/tmac12/xeora-backend) and start with `node app.js`.
+
+---
+
+# TODO
+
+- [ ] Send welcome message via email from supabase
+- [ ] Share calendar with other contacts
+- [ ] 
