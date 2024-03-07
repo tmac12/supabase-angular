@@ -1,16 +1,9 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import {
-  CalendarOptions,
-  DateSelectArg,
-  EventApi,
-  EventSourceInput,
-} from '@fullcalendar/core';
+import { CalendarOptions, EventApi } from '@fullcalendar/core';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { CalendarService } from '../../services/calendar.service';
-import { CalendarEvent } from '../../models/calendarEvent';
-import { options } from '@fullcalendar/core/preact';
 import { CustomModalComponent } from '../../custom-modal/custom-modal.component';
 import { ShiftEditorModalComponent } from '../../shift-editor-modal/shift-editor-modal.component';
 import { ShiftService } from '../../shifts/shift.service';

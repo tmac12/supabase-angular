@@ -1,17 +1,5 @@
 <div>
-  @if (shiftSignal()){
-  {{ shiftSignal() | json }}
-  } @if (eventsSignal()){
-  <p>events signal</p>
-  } @if(eventsComputed() ){
-  {{ eventsComputed() | json }}
-  } @if(calendarEventsComputed()){
-  <p>calendar events</p>
-  {{ calendarEventsComputed() | json }}
-  } @if (calendarOptionsComputed()){
-  <p>Options:</p>
-  {{ calendarOptionsComputed() | json }}
-  } @if (calendarVisible()) {
+  @if (calendarVisible()) {
 
   <full-calendar [options]="calendarOptionsComputed()">
     <ng-template #eventContent let-arg>
