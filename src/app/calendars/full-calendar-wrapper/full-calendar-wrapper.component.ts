@@ -13,6 +13,8 @@ import { CalendarEvent } from '../../models/calendarEvent';
 import { options } from '@fullcalendar/core/preact';
 import { CustomModalComponent } from '../../custom-modal/custom-modal.component';
 import { ShiftEditorModalComponent } from '../../shift-editor-modal/shift-editor-modal.component';
+import { ShiftService } from '../../shifts/shift.service';
+import { JsonPipe } from '@angular/common';
 // import timeGridPlugin from '@fullcalendar/timegrid';
 // import listPlugin from '@fullcalendar/list';
 // import { INITIAL_EVENTS, createEventId } from './event-utils';
@@ -24,6 +26,7 @@ import { ShiftEditorModalComponent } from '../../shift-editor-modal/shift-editor
     FullCalendarModule,
     CustomModalComponent,
     ShiftEditorModalComponent,
+    JsonPipe,
   ],
   templateUrl: './full-calendar-wrapper.component.html',
   styleUrl: './full-calendar-wrapper.component.scss',
@@ -61,28 +64,14 @@ export class FullCalendarWrapperComponent {
   });
   currentEvents = signal<EventApi[]>([]);
   selectedDate = signal<Date>(new Date());
+  shiftService = inject(ShiftService);
+  // shifts = this.shiftService.getShiftsSignal();
+  shifts = this.shiftService.shiftList;
 
   handleDateClick(arg: DateClickArg) {
     this.modalMessage = `You clicked on date: ${arg.dateStr}`;
     this.selectedDate.set(arg.date);
     this.isModalVisible.set(true);
-    return;
-
-    alert('date click! ' + arg.dateStr);
-    const fakeEvent: CalendarEvent = {
-      created_at: new Date(),
-      start_timestamp: arg.date,
-      end_timestamp: new Date(new Date().getDate() + 1),
-      shift_id: 6,
-      title: 'test 1',
-      id: undefined,
-      shared_with: undefined,
-      owner_id: undefined,
-    };
-    this.calendarService.addEvent(fakeEvent).subscribe((res) => {
-      console.log('add event completed');
-      console.log(res);
-    });
   }
 
   /**
@@ -96,9 +85,13 @@ export class FullCalendarWrapperComponent {
       this.events.set(res.data);
 
       const calendarEvents = res.data?.map((item) => {
+        const backgroundColor = this.getShiftColor(item.shift_id);
         const eventItem = {
           title: item.title,
           date: item.start_timestamp,
+          backgroundColor: backgroundColor,
+          allDay: true,
+          display: 'background',
         };
         return eventItem;
       });
@@ -128,6 +121,12 @@ export class FullCalendarWrapperComponent {
 
   isModalVisible = signal(false);
   modalMessage: string = '';
+
+  getShiftColor(shift_id: number | undefined) {
+    const shifts = this.shifts();
+    const currentShift = shifts.find((s) => s.id == shift_id);
+    return currentShift?.color ?? 'blue';
+  }
 
   createEventId() {
     return String(this.eventGuid++);

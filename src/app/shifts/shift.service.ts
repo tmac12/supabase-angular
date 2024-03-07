@@ -2,12 +2,14 @@ import { Injectable, inject, signal } from '@angular/core';
 import { Shift } from '../models/shift';
 import { SupabaseService } from '../supabase.service';
 import { from } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShiftService {
   supabase = inject(SupabaseService);
+  shiftList = signal<Shift[]>([]);
 
   currentShift = signal<Shift>({
     name: '',
@@ -33,6 +35,10 @@ export class ShiftService {
     const promise = this.supabase.getShifts();
     const observable = from(promise);
     return observable;
+  }
+
+  getShiftsSignal() {
+    return toSignal(this.getShiftsObservable());
   }
 
   async getShiftsPromise() {

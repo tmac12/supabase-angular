@@ -33,6 +33,7 @@ export default class HomeComponent {
     this.shiftService.getShiftsObservable().subscribe((res) => {
       if (res.error) console.error(res.error);
       this.shifts.set(res.data);
+      if (res.data) this.shiftService.shiftList.set(res.data);
     });
   }
 }
