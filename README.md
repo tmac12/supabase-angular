@@ -14,6 +14,10 @@ To get google calendars use project [xeora-backend](https://github.com/tmac12/xe
 
 # TODO
 
-- [ ] Send welcome message via email from supabase
+- [ ] Deploy to server
+- [ ] Send welcome message via email from supabase:
+        - https://supabase.com/docs/guides/functions/examples/send-emails
+        - https://www.reddit.com/r/Supabase/comments/187s9em/what_is_the_best_way_to_send_a_really_nice/
+        - https://bejamas.io/blog/send-emails-supabase-edge-functions-database-triggers/
 - [ ] Share calendar with other contacts
-- [ ] 
+- [ ] Create a logo
