@@ -1,0 +1,10 @@
+<select
+  class="select select-primary w-full max-w-xs"
+  [(ngModel)]="selectedValue"
+>
+  <!-- (change)="onSelectionChange($event)" -->
+  <option disabled selected [ngValue]="null">Select a shift:</option>
+  @for (item of shifts(); track $index) {
+  <option [ngValue]="item">{{ item.name }}</option>
+  }
+</select>

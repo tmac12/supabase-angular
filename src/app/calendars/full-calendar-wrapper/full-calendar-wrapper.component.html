@@ -1,0 +1,22 @@
+<div>
+  @if (calendarVisible()) {
+
+  <full-calendar [options]="calendarOptionsComputed()">
+    <ng-template #eventContent let-arg>
+      <b>{{ arg.timeText }}</b>
+      <i>{{ arg.event.title }}</i>
+    </ng-template>
+  </full-calendar>
+  }
+  <!-- @if (isModalVisible()){ -->
+  <app-shift-editor-modal
+    [(isVisible)]="isModalVisible"
+    [(currentDate)]="selectedDate"
+  ></app-shift-editor-modal>
+  <!-- } -->
+
+  <!-- <app-custom-modal
+    [isVisible]="isModalVisible"
+    [message]="modalMessage"
+  ></app-custom-modal> -->
+</div>

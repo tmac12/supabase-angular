@@ -1,33 +1,52 @@
-<div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-  <form class="card-body" [formGroup]="shiftForm">
-    @if(shiftName()){
-    <div>{{ shiftName() }} wonderful!</div>
-    } @if (nameSignal()) {
+<!-- <div
+  class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 items-center text-center"
+> -->
+<div class="card lg:card-side bg-base-100 shadow-xl">
+  <figure>
+    <img
+      src="https://images.pexels.com/photos/636237/pexels-photo-636237.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      alt="Album"
+    />
+  </figure>
+
+  <div class="card-body">
+    <!-- https://images.pexels.com/photos/636237/pexels-photo-636237.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2 -->
+    <h2 class="card-title">
+      Configure your
+
+      <div class="badge badge-secondary">NEW</div>
+      shift
+    </h2>
+    <form class="card-body" [formGroup]="shiftForm">
+      @if(shiftName()){
+      <div>{{ shiftName() }} wonderful name!</div>
+      }
+      <!-- @if (nameSignal()) {
     <div>{{ nameSignal() }} is a great name!</div>
-    }
-    <label class="input input-bordered flex items-center gap-2">
-      Name
-      <input
-        type="text"
-        class="grow"
-        placeholder=""
-        formControlName="name"
-        #name
-      />
-    </label>
-    <label class="input input-bordered flex items-center gap-2">
-      Start time
-      <input type="time" class="grow" placeholder="" />
-    </label>
-    <label class="input input-bordered flex items-center gap-2">
-      End time
-      <input type="time" class="grow" placeholder="" />
-    </label>
-    <label class="input input-bordered flex items-center gap-2">
-      Color
-      <app-color-picker></app-color-picker>
-    </label>
-    <!-- <label class="input input-bordered flex items-center gap-2">
+    } -->
+      <label class="input input-bordered flex items-center gap-2">
+        Name
+        <input
+          type="text"
+          class="grow"
+          placeholder=""
+          formControlName="name"
+          #name
+        />
+      </label>
+      <label class="input input-bordered flex items-center gap-2">
+        Start time
+        <input type="time" class="grow" placeholder="" />
+      </label>
+      <label class="input input-bordered flex items-center gap-2">
+        End time
+        <input type="time" class="grow" placeholder="" />
+      </label>
+      <label class="input input-bordered flex items-center gap-2">
+        Color
+        <app-color-picker></app-color-picker>
+      </label>
+      <!-- <label class="input input-bordered flex items-center gap-2">
     <input type="text" class="grow" placeholder="Search" />
     <kbd class="kbd kbd-sm">⌘</kbd>
     <kbd class="kbd kbd-sm">K</kbd>
@@ -36,8 +55,9 @@
     <input type="text" class="grow" placeholder="Search" />
     <span class="badge badge-info">Optional</span>
   </label> -->
-    <div class="form-control mt-6">
-      <button class="btn btn-primary" (click)="saveShift()">Save</button>
-    </div>
-  </form>
+      <div class="form-control mt-6">
+        <button class="btn btn-primary" (click)="saveShift()">Save</button>
+      </div>
+    </form>
+  </div>
 </div>

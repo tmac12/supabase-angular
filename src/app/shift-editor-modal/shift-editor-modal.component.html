@@ -1,13 +1,22 @@
 <!-- Open the modal using ID.showModal() method -->
-<dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+<dialog id="my_modal_5" #modalDialog class="modal modal-bottom sm:modal-middle">
   <div class="modal-box">
-    <h3 class="font-bold text-lg">Hello!</h3>
-    <p class="py-4">Press ESC key or click the button below to close</p>
-    <div class="modal-action">
-      <form method="dialog">
-        <!-- if there is a button in form, it will close the modal -->
-        <button class="btn">Close</button>
-      </form>
+    <div class="card-body items-center text-center">
+      <h3 class="font-bold text-lg">{{ currentDate() | date }}</h3>
+      <app-shift-select #shiftSelect></app-shift-select>
+
+      @if(selectedShift()){
+      <p></p>
+      <app-shift-preview [shift]="selectedShift()"></app-shift-preview>
+      }
+      <p class="py-4">Press ESC key or click the button below to close</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button in form, it will close the modal -->
+          <button class="btn btn-primary" (click)="saveDialog()">Save</button>
+          <button class="btn" (click)="closeDialog()">Close</button>
+        </form>
+      </div>
     </div>
   </div>
 </dialog>

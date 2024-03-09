@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ShiftService } from '../shift.service';
 import { AccountService } from '../../account/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shift-editor',
@@ -28,22 +29,23 @@ export default class ShiftEditorComponent implements AfterViewInit {
   shiftService = inject(ShiftService);
   accountService = inject(AccountService);
   currentShift = this.shiftService.currentShift();
+  router = inject(Router);
 
   shiftForm: FormGroup;
   shiftName = signal('');
-  nameSignal = signal<any | undefined>(undefined);
+  // nameSignal = signal<any | undefined>(undefined);
 
   constructor(private fb: FormBuilder) {
     this.shiftForm = this.fb.group({
       name: [''],
     });
-    const formName = this.shiftForm.get('name');
-    if (formName) {
-      const newName = toSignal(formName.valueChanges, {
-        initialValue: '',
-      });
-      this.nameSignal.set(newName);
-    }
+    // const formName = this.shiftForm.get('name');
+    // if (formName) {
+    //   const newName = toSignal(formName.valueChanges, {
+    //     initialValue: '',
+    //   });
+    //   this.nameSignal.set(newName);
+    // }
   }
   ngAfterViewInit(): void {
     // Represent the 'firstName' form control as a Signal
@@ -76,6 +78,7 @@ export default class ShiftEditorComponent implements AfterViewInit {
     res.then((res) => {
       console.log('shift updated');
       console.log(res);
+      this.router.navigate(['home']);
     });
   }
 }

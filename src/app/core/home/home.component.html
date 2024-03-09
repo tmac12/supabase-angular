@@ -1,1 +1,7 @@
-<app-navbar></app-navbar> <app-shift-list></app-shift-list>
+<app-navbar></app-navbar>
+@if(showWelcome()){
+<app-welcome></app-welcome>
+} @else {
+<app-full-calendar-wrapper></app-full-calendar-wrapper>
+<app-shift-list></app-shift-list>
+}
