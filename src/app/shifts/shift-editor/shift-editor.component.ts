@@ -9,7 +9,13 @@ import {
 import { ColorPickerComponent } from '../../color-picker/color-picker.component';
 import { SupabaseService } from '../../supabase.service';
 import { Shift } from '../../models/shift';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ShiftService } from '../shift.service';
 import { AccountService } from '../../account/account.service';
@@ -32,8 +38,10 @@ export default class ShiftEditorComponent implements AfterViewInit {
   router = inject(Router);
 
   shiftForm: FormGroup;
-  shiftName = signal('');
+  //shiftName = signal('');
   // nameSignal = signal<any | undefined>(undefined);
+  nameControl = new FormControl('', Validators.required);
+  shiftName = toSignal(this.nameControl.valueChanges, { initialValue: '' });
 
   constructor(private fb: FormBuilder) {
     this.shiftForm = this.fb.group({
@@ -49,18 +57,23 @@ export default class ShiftEditorComponent implements AfterViewInit {
   }
   ngAfterViewInit(): void {
     // Represent the 'firstName' form control as a Signal
-
-    this.nameInput?.nativeElement.addEventListener('change', () => {
-      this.shiftName.set(this.nameInput?.nativeElement.value ?? '');
-    });
+    // this.nameInput?.nativeElement.addEventListener('change', () => {
+    //   this.shiftName.set(this.nameInput?.nativeElement.value ?? '');
+    // });
   }
 
   saveShift() {
+    const shiftName = this.shiftName();
+    if (!shiftName) {
+      console.log('no shift name');
+      return;
+    }
+
     const shift = this.shiftService.currentShift();
     const owner_id = this.accountService.userId();
     const shiftToSave = {
       ...shift,
-      name: this.shiftName(),
+      name: shiftName,
       created_at: new Date().toUTCString(),
       start_time: '10:00:00',
       end_time: '12:00:00',
