@@ -1,10 +1,44 @@
-# SupabaseAngular
+# XeOra
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.2.
+Welcome to XeOra, your ultimate solution for shift and calendar management! This innovative application streamlines the process of scheduling and managing shifts, making it a breeze for both managers and employees.
 
-## Development server
+## 🌟 Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Efficient Shift Management**: View, create, and modify shifts directly on the calendar.
+- **Integration with Other Calendars**: Sync with Google Calendar, iCal, and other popular calendar services.
+- **User-Friendly Interface**: An intuitive design that makes scheduling and managing shifts easy.
+- **Adaptable to Your Needs**: Whether you're a small business or a large corporation, XeOra is designed to adapt to your needs.
+
+## 🏗️ Infrastructure
+
+XeOra is built with a microservices architecture for scalability and ease of development. Here's a brief overview of the main components:
+
+- **Frontend**: The frontend is built with Angular 17 and TypeScript, providing a robust and type-safe development experience.
+- **Backend**: The backend services are built with Supabase.
+- **Database**: We use Postgres for our database needs.
+- **Authentication**: We use Google authentication with Supabase service
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js
+- npm
+
+🖥️ Usage
+After installation, you can start the application with:
+
+`npm start`
+The application will be available at http://localhost:4200.
+
+## Deploy
+
+To deploy with Github pages
+
+```
+ng deploy --base-href="https://tmac12.github.io/supabase-angular/"
+```
+
 
 # Google Calendars
 
@@ -14,7 +48,6 @@ To get google calendars use project [xeora-backend](https://github.com/tmac12/xe
 
 # TODO
 
-- [ ] Deploy to server
 - [ ] Send welcome message via email from supabase:
         - https://supabase.com/docs/guides/functions/examples/send-emails
         - https://www.reddit.com/r/Supabase/comments/187s9em/what_is_the_best_way_to_send_a_really_nice/
