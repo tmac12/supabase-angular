@@ -36,11 +36,21 @@
       </label>
       <label class="input input-bordered flex items-center gap-2">
         Start time
-        <input type="time" class="grow" placeholder="" />
+        <input
+          type="time"
+          class="grow"
+          placeholder=""
+          [formControl]="startTimeControl"
+        />
       </label>
       <label class="input input-bordered flex items-center gap-2">
         End time
-        <input type="time" class="grow" placeholder="" />
+        <input
+          type="time"
+          class="grow"
+          placeholder=""
+          [formControl]="endTimeControl"
+        />
       </label>
       <label class="input input-bordered flex items-center gap-2">
         Color

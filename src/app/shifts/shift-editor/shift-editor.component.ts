@@ -41,7 +41,15 @@ export default class ShiftEditorComponent implements AfterViewInit {
   //shiftName = signal('');
   // nameSignal = signal<any | undefined>(undefined);
   nameControl = new FormControl('', Validators.required);
+  startTimeControl = new FormControl('00:00:00', Validators.required);
+  endTimeControl = new FormControl('00:00:00', Validators.required);
   shiftName = toSignal(this.nameControl.valueChanges, { initialValue: '' });
+  startTime = toSignal(this.startTimeControl.valueChanges, {
+    initialValue: '00:00:00',
+  });
+  endTime = toSignal(this.endTimeControl.valueChanges, {
+    initialValue: '00:00:00',
+  });
 
   constructor(private fb: FormBuilder) {
     this.shiftForm = this.fb.group({
@@ -68,6 +76,16 @@ export default class ShiftEditorComponent implements AfterViewInit {
       console.log('no shift name');
       return;
     }
+    const startTime = this.startTime();
+    if (!startTime) {
+      console.log('no start time');
+      return;
+    }
+    const endTime = this.endTime();
+    if (!endTime) {
+      console.log('no end time');
+      return;
+    }
 
     const shift = this.shiftService.currentShift();
     const owner_id = this.accountService.userId();
@@ -75,8 +93,8 @@ export default class ShiftEditorComponent implements AfterViewInit {
       ...shift,
       name: shiftName,
       created_at: new Date().toUTCString(),
-      start_time: '10:00:00',
-      end_time: '12:00:00',
+      start_time: startTime,
+      end_time: endTime,
       owner_id: owner_id,
     };
     //  : Shift = {
