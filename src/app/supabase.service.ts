@@ -102,7 +102,7 @@ export class SupabaseService {
           access_type: 'offline',
           prompt: 'consent',
         },
-        redirectTo: 'https://tmac12.github.io/supabase-angular/', //TODO: https://supabase.com/docs/guides/auth/concepts/redirect-urls
+        //redirectTo: 'https://tmac12.github.io/supabase-angular/', //TODO: https://supabase.com/docs/guides/auth/concepts/redirect-urls
       },
     });
   }
