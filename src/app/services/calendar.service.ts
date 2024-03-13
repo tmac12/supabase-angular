@@ -1,6 +1,6 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { SupabaseService } from '../supabase.service';
-import { from } from 'rxjs';
+import { from, take } from 'rxjs';
 import { CalendarEvent } from '../models/calendarEvent';
 import { Shift } from '../models/shift';
 
@@ -9,6 +9,7 @@ import { Shift } from '../models/shift';
 })
 export class CalendarService {
   supabase = inject(SupabaseService);
+  eventsAdded = signal<CalendarEvent[] | null>(null);
   constructor() {}
 
   getEventsObservable() {
@@ -37,6 +38,7 @@ export class CalendarService {
     this.addEvent(fakeEvent).subscribe((res) => {
       console.log('add event completed');
       console.log(res);
+      this.eventsAdded.set([fakeEvent]);
     });
   }
 }

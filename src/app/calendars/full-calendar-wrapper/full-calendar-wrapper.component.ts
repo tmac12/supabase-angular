@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions, EventApi } from '@fullcalendar/core';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
@@ -10,6 +10,7 @@ import { ShiftService } from '../../shifts/shift.service';
 import { JsonPipe } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { BehaviorSubject, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-full-calendar-wrapper',
@@ -32,9 +33,19 @@ export class FullCalendarWrapperComponent {
   calendarService = inject(CalendarService);
   // shifts = this.shiftService.getShiftsSignal();
   shifts = this.shiftService.shiftList;
+  eventsAdded = this.calendarService.eventsAdded;
+
+  eventsSubject = new BehaviorSubject(
+    this.calendarService.getEventsObservable()
+  );
 
   shiftSignal = toSignal(this.shiftService.getShiftsObservable());
-  eventsSignal = toSignal(this.calendarService.getEventsObservable());
+  // eventsSignal = toSignal(this.calendarService.getEventsObservable());
+  eventsSignal = toSignal(
+    this.eventsSubject.pipe(
+      switchMap(() => this.calendarService.getEventsObservable())
+    )
+  );
   eventsComputed = computed(() => {
     const res = this.eventsSignal();
     if (res) {
@@ -115,6 +126,21 @@ export class FullCalendarWrapperComponent {
   //   eventRemove:
   //   */
   // });
+
+  constructor() {
+    effect(() => {
+      const newEvent = this.eventsAdded();
+      if (newEvent) {
+        console.log('new event added');
+        console.log(newEvent);
+        //reload events. Thanks to; https://stackoverflow.com/questions/77606078/how-to-update-an-observable-when-it-has-been-converted-to-signal-if-new-data-has
+        this.eventsSubject.next(this.calendarService.getEventsObservable());
+      }
+      console.log(
+        'FullCalendarWrapperComponent isVisible: ' + this.calendarVisible()
+      );
+    });
+  }
 
   handleDateClick(arg: DateClickArg) {
     this.modalMessage = `You clicked on date: ${arg.dateStr}`;
