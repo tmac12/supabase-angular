@@ -2,3 +2,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+//customize fullCalendar css
+//Thanks to: https://fullcalendar.io/docs/css-customization
+:root {
+  // --fc-border-color: black;
+  // --fc-daygrid-event-dot-width: 5px;
+  --fc-bg-event-opacity: 1;
+}
