@@ -93,6 +93,16 @@ export class SupabaseService {
     return this.supabase.auth.onAuthStateChange(callback);
   }
 
+  //thanks to: https://supabase.com/docs/guides/auth/concepts/redirect-urls
+  getURL = () => {
+    let url = environment.publicUrl ?? window.location.origin;
+    // Make sure to include `https://` when not localhost.
+    //url = url.includes('http') ? url : `https://${url}`
+    // Make sure to include a trailing `/`.
+    url = url.charAt(url.length - 1) === '/' ? url : `${url}/`;
+    return url;
+  };
+
   async signInGoogle() {
     return this.supabase.auth.signInWithOAuth({
       provider: 'google',
@@ -102,7 +112,7 @@ export class SupabaseService {
           access_type: 'offline',
           prompt: 'consent',
         },
-        //redirectTo: 'https://tmac12.github.io/supabase-angular/', //TODO: https://supabase.com/docs/guides/auth/concepts/redirect-urls
+        redirectTo: this.getURL(),
       },
     });
   }
