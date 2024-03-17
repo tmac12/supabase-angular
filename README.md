@@ -54,3 +54,4 @@ To get google calendars use project [xeora-backend](https://github.com/tmac12/xe
         - https://bejamas.io/blog/send-emails-supabase-edge-functions-database-triggers/
 - [ ] Share calendar with other contacts
 - [ ] Create a logo
+- [ ] Get only current months events
