@@ -2,6 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import {
   AuthChangeEvent,
   AuthSession,
+  RealtimeChannel,
   Session,
   SupabaseClient,
   User,
@@ -168,5 +169,27 @@ export class SupabaseService {
 
   getEvents() {
     return this.supabase.from('events').select().returns<CalendarEvent[]>();
+  }
+
+  subscribeToEventChanges() {
+    const channel = this.supabase
+      .channel('events-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'events',
+        },
+        (payload) => console.log(payload)
+      )
+      .subscribe();
+    this.eventsChannel = channel;
+  }
+
+  eventsChannel: RealtimeChannel | undefined;
+
+  unsubscribeToEventChanges() {
+    if (this.eventsChannel) this.supabase.removeChannel(this.eventsChannel);
   }
 }

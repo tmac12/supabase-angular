@@ -22,6 +22,16 @@ export class CalendarService {
     return from(this.supabase.updateEvent(event));
   }
 
+  subascribeEventChannges() {
+    this.supabase.subscribeToEventChanges();
+
+    // this.supabase.onEventChanges().subscribe((event) => {
+    //   console.log('event changes');
+    //   console.log(event);
+    //   this.eventsAdded.set(event);
+    // });
+  }
+
   saveShiftToCalendar(shift: Shift, startDate: Date) {
     const fakeEvent: CalendarEvent = {
       created_at: new Date(),

@@ -140,6 +140,8 @@ export class FullCalendarWrapperComponent {
         'FullCalendarWrapperComponent isVisible: ' + this.calendarVisible()
       );
     });
+
+    this.calendarService.subascribeEventChannges();
   }
 
   handleDateClick(arg: DateClickArg) {
