@@ -33,7 +33,7 @@ export class CalendarService {
   }
 
   saveShiftToCalendar(shift: Shift, startDate: Date) {
-    const fakeEvent: CalendarEvent = {
+    const newEvent: CalendarEvent = {
       created_at: new Date(),
       start_timestamp: startDate,
       end_timestamp: new Date(new Date().getDate() + 1),
@@ -45,10 +45,10 @@ export class CalendarService {
     };
 
     //TODO: pipe take1
-    this.addEvent(fakeEvent).subscribe((res) => {
+    this.addEvent(newEvent).subscribe((res) => {
       console.log('add event completed');
       console.log(res);
-      this.eventsAdded.set([fakeEvent]);
+      this.eventsAdded.set([newEvent]);
     });
   }
 }

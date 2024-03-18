@@ -192,4 +192,18 @@ export class SupabaseService {
   unsubscribeToEventChanges() {
     if (this.eventsChannel) this.supabase.removeChannel(this.eventsChannel);
   }
+
+  /** Friends */
+
+  updateFriend(friendUid: string) {
+    const update = {
+      owner_id: this._session?.user.id,
+      user_id: friendUid,
+    };
+    return this.supabase.from('friends').upsert(update);
+  }
+
+  getFriends() {
+    return this.supabase.from('friends').select().returns();
+  }
 }

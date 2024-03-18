@@ -16,5 +16,14 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () => import('./login-form/login-form.component'),
   },
+  {
+    path: 'friends',
+    loadComponent: () => import('./friends/friends.component'),
+    canActivate: [authGuard],
+  },
+  // {
+  //   path: '404',
+  //   loadComponent: () => import('./not-found/not-found.component'),
+  // },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];

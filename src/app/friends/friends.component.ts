@@ -1,12 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AddFriendComponent } from './add-friend/add-friend.component';
+import { FriendsService } from '../services/friends.service';
 
 @Component({
   selector: 'app-friends',
   standalone: true,
-  imports: [],
+  imports: [AddFriendComponent],
   templateUrl: './friends.component.html',
-  styleUrl: './friends.component.scss'
+  styleUrl: './friends.component.scss',
 })
-export class FriendsComponent {
+export default class FriendsComponent {
+  friendService = inject(FriendsService);
 
+  friends$ = this.friendService.getFriends();
+  friends = this.friends$;
 }

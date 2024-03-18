@@ -11,4 +11,8 @@ export class AuthService {
   });
 
   constructor() {}
+
+  signInWithEmail(email: string) {
+    return this.supabase.signIn(email);
+  }
 }
