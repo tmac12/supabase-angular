@@ -205,6 +205,53 @@ export class SupabaseService {
   }
 
   getFriends() {
-    return this.supabase.from('friends').select().returns<Friend[]>();
+    return this.supabase
+      .from('friends')
+      .select()
+      .eq('status', 'accepted')
+      .returns<Friend[]>();
+  }
+
+  // Invite others
+  // async addFriend(boardId: string, email: string) {
+  //   const user = await this.supabase
+  //     .from('USERS_TABLE')
+  //     .select('id')
+  //     .match({ email })
+  //     .single();
+
+  //   if (user.data?.id) {
+  //     const userId = user.data.id;
+  //     const userBoard = await this.supabase.from(USER_BOARDS_TABLE).insert({
+  //       user_id: userId,
+  //       board_id: boardId,
+  //     });
+  //     return userBoard;
+  //   } else {
+  //     return null;
+  //   }
+  // }
+
+  async userExistByEmail(email: string) {
+    const { data, error } = await this.supabase.rpc(
+      'check_user_exists_by_email',
+      { user_email: email }
+    );
+    if (error) {
+      console.error(error);
+      return false;
+    }
+    return data;
+  }
+
+  async addFriendByEmail(email: string) {
+    const { data, error } = await this.supabase.rpc('add_friend_by_email', {
+      user_email: email,
+    });
+    if (error) {
+      console.error(error);
+      return false;
+    }
+    return data;
   }
 }

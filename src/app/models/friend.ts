@@ -1,4 +1,5 @@
 export interface Friend {
-  email: string;
-  uuid: string;
+  owner_id: string;
+  user_id: string;
+  status: string;
 }
