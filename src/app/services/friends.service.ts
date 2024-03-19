@@ -23,6 +23,8 @@ export class FriendsService {
     return from(this.supabase.getFriends());
   }
   public async getFriendPromise() {
-    return await this.supabase.getFriends();
+    const { data, error } = await this.supabase.getFriends();
+    if (error) console.error(error);
+    return data;
   }
 }

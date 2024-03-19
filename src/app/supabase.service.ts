@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 import { BehaviorSubject } from 'rxjs';
 import { Shift } from './models/shift';
 import { CalendarEvent } from './models/calendarEvent';
+import { Friend } from './models/friend';
 
 export interface Profile {
   id?: string;
@@ -204,6 +205,6 @@ export class SupabaseService {
   }
 
   getFriends() {
-    return this.supabase.from('friends').select().returns();
+    return this.supabase.from('friends').select().returns<Friend[]>();
   }
 }
