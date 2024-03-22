@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { GoogleAuthComponent } from './google-auth/google-auth.component';
 import { GoogleCalendarComponent } from './google-calendar/google-calendar.component';
@@ -8,6 +8,7 @@ import { ShiftListComponent } from './shifts/shift-list/shift-list.component';
 import AccountComponent from './account/account.component';
 import LoginFormComponent from './login-form/login-form.component';
 import { AuthService } from './services/auth.service';
+import { FriendsService } from './services/friends.service';
 
 @Component({
   selector: 'app-root',

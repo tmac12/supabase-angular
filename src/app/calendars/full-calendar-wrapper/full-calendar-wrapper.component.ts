@@ -141,7 +141,7 @@ export class FullCalendarWrapperComponent {
       );
     });
 
-    this.calendarService.subascribeEventChannges();
+    this.calendarService.subascribeEventChanges();
   }
 
   handleDateClick(arg: DateClickArg) {

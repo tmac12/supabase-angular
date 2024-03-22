@@ -22,7 +22,7 @@ export class CalendarService {
     return from(this.supabase.updateEvent(event));
   }
 
-  subascribeEventChannges() {
+  subascribeEventChanges() {
     this.supabase.subscribeToEventChanges();
 
     // this.supabase.onEventChanges().subscribe((event) => {
@@ -30,6 +30,10 @@ export class CalendarService {
     //   console.log(event);
     //   this.eventsAdded.set(event);
     // });
+  }
+
+  unsubscribeEventChannges() {
+    this.supabase.unsubscribeEventChanges();
   }
 
   saveShiftToCalendar(shift: Shift, startDate: Date) {

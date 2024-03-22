@@ -190,7 +190,7 @@ export class SupabaseService {
 
   eventsChannel: RealtimeChannel | undefined;
 
-  unsubscribeToEventChanges() {
+  unsubscribeEventChanges() {
     if (this.eventsChannel) this.supabase.removeChannel(this.eventsChannel);
   }
 
@@ -245,13 +245,41 @@ export class SupabaseService {
   }
 
   async addFriendByEmail(email: string) {
-    const { data, error } = await this.supabase.rpc('add_friend_by_email', {
+    // const { data, error } = await this.supabase.rpc('add_friend_by_email', {
+    return await this.supabase.rpc('add_friend_by_email', {
       user_email: email,
     });
-    if (error) {
-      console.error(error);
-      return false;
-    }
-    return data;
+
+    // if (error) {
+    //   console.error(error);
+    //   return false;
+    // }
+    // return data;
+  }
+
+  friendRequests = signal('');
+
+  subscribeToFriendChanges() {
+    const channel = this.supabase
+      .channel('friends-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'friends',
+        },
+        (payload) => {
+          this.friendRequests.set('new friend request ' + payload);
+        }
+      )
+      .subscribe();
+    this.friendsChannel = channel;
+  }
+
+  friendsChannel: RealtimeChannel | undefined;
+
+  unsubscribeFriendsChanges() {
+    if (this.friendsChannel) this.supabase.removeChannel(this.friendsChannel);
   }
 }
