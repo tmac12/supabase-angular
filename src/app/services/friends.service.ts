@@ -21,6 +21,10 @@ export class FriendsService {
     return await this.supabase.updateFriend(friendId);
   }
 
+  public getAllFriends() {
+    return from(this.supabase.getAllFriends());
+  }
+
   public getFriends() {
     return from(this.supabase.getFriends());
   }

@@ -1,3 +1,77 @@
 <p>friends works!</p>
 <app-add-friend></app-add-friend>
-<div>{{ friends() | json }}</div>
+<!-- <div>{{ friends() | json }}</div> -->
+<h1>All Friends</h1>
+<!-- <div>{{ allFriends() | json }}</div> -->
+
+<div class="overflow-x-auto">
+  <table class="table">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th>
+          <label>
+            <input type="checkbox" class="checkbox" />
+          </label>
+        </th>
+        <th>owner_id</th>
+        <th>status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (allFriends()) { @for (item of allFriendsData(); track $index) {
+      <!-- row  -->
+      <tr>
+        <th>
+          <label>
+            <input type="checkbox" class="checkbox" />
+          </label>
+        </th>
+        <td>
+          <div class="flex items-center gap-3">
+            <div class="avatar">
+              <div class="mask mask-squircle w-12 h-12">
+                <img
+                  src="/tailwind-css-component-profile-2@56w.png"
+                  alt="Avatar Tailwind CSS Component"
+                />
+              </div>
+            </div>
+            <div>
+              <div class="font-bold">{{ item.owner_id }}</div>
+              <div class="text-sm opacity-50">email</div>
+            </div>
+          </div>
+        </td>
+        <td>
+          @switch (item.status) { @case ('accepted') {
+          <span class="text-green-500">
+            {{ item.status }}
+          </span>
+          } @default {
+          {{ item.status }}
+          } }
+        </td>
+        <th>
+          @switch (item.status) { @case ('pending') {
+          <div>
+            <button class="btn btn-success btn-xs">ACCEPT</button>
+            <button class="btn btn-error btn-xs">DECLINE</button>
+          </div>
+          } }
+        </th>
+      </tr>
+      } }
+    </tbody>
+    <!-- foot -->
+    <tfoot>
+      <tr>
+        <th></th>
+        <th>owner_id</th>
+        <th>status</th>
+        <th></th>
+      </tr>
+    </tfoot>
+  </table>
+</div>

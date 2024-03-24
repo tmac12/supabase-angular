@@ -213,6 +213,22 @@ export class SupabaseService {
       .returns<Friend[]>();
   }
 
+  /**
+   * Get friend with all status (pending, accepted, rejected, blocked)
+   * @returns
+   */
+  getAllFriends() {
+    return this.supabase.from('friends').select().returns<Friend[]>();
+  }
+
+  getFriendsRequest() {
+    return this.supabase
+      .from('friends')
+      .select()
+      .eq('status', 'pending')
+      .returns<Friend[]>();
+  }
+
   // Invite others
   // async addFriend(boardId: string, email: string) {
   //   const user = await this.supabase

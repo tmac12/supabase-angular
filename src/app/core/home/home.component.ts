@@ -15,7 +15,6 @@ import { WelcomeComponent } from '../welcome/welcome.component';
 import { FriendsService } from '../../services/friends.service';
 import { ToastComponent } from '../toast/toast.component';
 import { NotificationService } from '../../services/notification.service';
-import { options } from '@fullcalendar/core/preact';
 
 @Component({
   selector: 'app-home',
