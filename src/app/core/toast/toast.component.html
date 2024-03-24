@@ -1,0 +1,22 @@
+@if (show()) {
+
+<div class="toast toast-top toast-end">
+  <div
+    class="alert"
+    [ngClass]="{
+        'alert-info': variant() === 'info',
+        'alert-success': variant() === 'success',
+        'alert-error': variant() === 'error',
+      }"
+  >
+    <ng-content></ng-content>
+  </div>
+
+  <!-- <div class="alert alert-info">
+      <span>New mail arrived.</span>
+    </div>
+    <div class="alert alert-success">
+      <span>Message sent successfully.</span>
+    </div> -->
+</div>
+}

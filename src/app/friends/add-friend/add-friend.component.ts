@@ -2,7 +2,6 @@ import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { FriendsService } from '../../services/friends.service';
-import { SupabaseService } from '../../supabase.service';
 
 @Component({
   selector: 'app-add-friend',

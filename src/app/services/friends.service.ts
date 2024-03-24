@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { SupabaseService } from '../supabase.service';
 import { from } from 'rxjs';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -70,10 +71,12 @@ export class FriendsService {
   }
 
   subscribeToFriendChanges() {
+    console.log('subscribe to friend changes');
     this.supabase.subscribeToFriendChanges();
   }
 
   unsubscribeFriendChanges() {
+    console.log('unsubscribe friend changes');
     this.supabase.unsubscribeFriendsChanges();
   }
 }

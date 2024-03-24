@@ -1,7 +1,12 @@
 <app-navbar></app-navbar>
 @if(showWelcome()){
 <app-welcome></app-welcome>
-} @else {
+} @else { @if (notificationMsg()) {
+<app-toast variant="info" [show]="showNotification()">{{
+  notificationMsg()
+}}</app-toast>
+}
+
 <app-full-calendar-wrapper></app-full-calendar-wrapper>
 <app-shift-list></app-shift-list>
 
