@@ -44,3 +44,6 @@ Thumbs.db
 # Secrets config
 environment.development.ts
 .env
+
+#Nx cache
+.nx/cache/

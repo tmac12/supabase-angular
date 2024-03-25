@@ -3,7 +3,7 @@ import { AddFriendComponent } from './add-friend/add-friend.component';
 import { FriendsService } from '../services/friends.service';
 import { computedAsync } from 'ngxtension/computed-async';
 import { JsonPipe } from '@angular/common';
-import { map } from 'rxjs';
+import { first, map } from 'rxjs';
 import { Friend } from '../models/friend';
 import { AccountService } from '../account/account.service';
 
@@ -91,10 +91,11 @@ export default class FriendsComponent {
 
   acceptFriendship(friendId: string) {
     console.log('accept friend');
-    this.friendService.acceptFriendShip(friendId).subscribe();
+    //subscribe to the observable only once
+    this.friendService.acceptFriendShip(friendId).pipe(first()).subscribe();
   }
   declineFriendShip(friendId: string) {
     console.log('decline friend');
-    this.friendService.declineFriendShip(friendId);
+    this.friendService.declineFriendShip(friendId).pipe(first()).subscribe();
   }
 }
