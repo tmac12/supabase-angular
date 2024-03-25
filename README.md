@@ -56,3 +56,6 @@ To get google calendars use project [xeora-backend](https://github.com/tmac12/xe
 - [ ] Create a logo
 - [ ] Get only current months events
 - [ ] Move accountService on a shared component
+- [ ] Refactor with declarative code
+- [ ] Add private flag to calendar event
+- [ ] Handle click on existing event with action DELETE, UPDATE.
