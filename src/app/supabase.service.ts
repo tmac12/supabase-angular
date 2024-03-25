@@ -218,7 +218,20 @@ export class SupabaseService {
    * @returns
    */
   getAllFriends() {
-    return this.supabase.from('friends').select().returns<Friend[]>();
+    const res = this.supabase.from('friends').select().returns<Friend[]>();
+    return res;
+  }
+
+  /**
+   * Get all friends of the current logged user
+   * @returns
+   */
+  getAllOwnerFriends() {
+    return this.supabase
+      .from('friends')
+      .select()
+      .eq('owner_id', this._session?.user.id)
+      .returns<Friend[]>();
   }
 
   getFriendsRequest() {

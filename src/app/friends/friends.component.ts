@@ -4,7 +4,7 @@ import { FriendsService } from '../services/friends.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { computedAsync } from 'ngxtension/computed-async';
 import { JsonPipe } from '@angular/common';
-import { startWith } from 'rxjs';
+import { map, startWith } from 'rxjs';
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
 import { Friend } from '../models/friend';
 
@@ -24,28 +24,47 @@ export default class FriendsComponent {
   });
 
   allFriends = computedAsync(
-    () => this.friendService.getAllFriends().pipe(startWith([])),
+    () =>
+      this.friendService.getAllFriends().pipe(
+        // startWith([] as Friend[]),
+
+        // map((friends: Friend[] | PostgrestResponseFailure) => {
+        map((friendsResponse) => {
+          if (friendsResponse.error) {
+            console.error('Error fetching friends', friendsResponse.error);
+            return [] as Friend[];
+          }
+
+          let uniqueIds = new Set();
+          const friends = friendsResponse.data;
+          if (!Array.isArray(friends)) return [];
+          return friends.filter((friend) => {
+            if (!uniqueIds.has(friend.owner_id)) {
+              uniqueIds.add(friend.owner_id);
+              return true;
+            }
+            return false;
+          });
+        })
+      ),
     {
       initialValue: [],
     }
   );
 
-  allFriendsData = computed(() => {
-    const response = this.allFriends();
-    if (!response) {
-      return [];
-    }
+  // allFriendsData = computed(() => {
+  //   const response = this.allFriends();
+  //   if (!response) {
+  //     return [];
+  //   }
 
-    const castedRepsonse = response as PostgrestSingleResponse<Friend[]>;
-    if (castedRepsonse.error) {
-      console.error(castedRepsonse.error);
-      return [];
-    }
-
-    return castedRepsonse.data;
-
-    //const boh : PostgrestSingleResponse<Friend[]> | never[]
-  });
+  //   const castedResponse = response as PostgrestSingleResponse<Friend[]>;
+  //   if (castedResponse.error) {
+  //     console.error(castedResponse.error);
+  //     return [];
+  //   }
+  //   return castedResponse.data;
+  // });
 
   // isPostgrestSingleResponse(
   //   obj: any

@@ -25,6 +25,10 @@ export class FriendsService {
     return from(this.supabase.getAllFriends());
   }
 
+  public getAllOwnerFriends() {
+    return from(this.supabase.getAllOwnerFriends());
+  }
+
   public getFriends() {
     return from(this.supabase.getFriends());
   }

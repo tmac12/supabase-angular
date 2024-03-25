@@ -20,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-      @if (allFriends()) { @for (item of allFriendsData(); track $index) {
+      @if (allFriends()) { @for (item of allFriends(); track $index) {
       <!-- row  -->
       <tr>
         <th>
@@ -39,7 +39,7 @@
               </div>
             </div>
             <div>
-              <div class="font-bold">{{ item.owner_id }}</div>
+              <div class="font-bold">{{ item.email }}</div>
               <div class="text-sm opacity-50">email</div>
             </div>
           </div>
