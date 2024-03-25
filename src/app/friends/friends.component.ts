@@ -88,4 +88,13 @@ export default class FriendsComponent {
   //     obj.data.every((item: any) => item instanceof Friend)
   //   );
   // }
+
+  acceptFriendship(friendId: string) {
+    console.log('accept friend');
+    this.friendService.acceptFriendShip(friendId).subscribe();
+  }
+  declineFriendShip(friendId: string) {
+    console.log('decline friend');
+    this.friendService.declineFriendShip(friendId);
+  }
 }

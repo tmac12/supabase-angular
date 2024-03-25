@@ -64,7 +64,7 @@
       },
       {
         "file": "README.md",
-        "hash": "14489638733814294387"
+        "hash": "11682545287868091411"
       },
       {
         "file": "angular.json",
@@ -180,7 +180,7 @@
       },
       {
         "file": "src/app/calendars/full-calendar-wrapper/full-calendar-wrapper.component.ts",
-        "hash": "12122830357524184094"
+        "hash": "6927958148609508919"
       },
       {
         "file": "src/app/color-picker/color-picker.component.html",
@@ -200,7 +200,7 @@
       },
       {
         "file": "src/app/core/home/home.component.html",
-        "hash": "6121462331850633709"
+        "hash": "4214751831116462262"
       },
       {
         "file": "src/app/core/home/home.component.scss",
@@ -212,11 +212,11 @@
       },
       {
         "file": "src/app/core/home/home.component.ts",
-        "hash": "16208910825868086984"
+        "hash": "9566211320320007500"
       },
       {
         "file": "src/app/core/navbar/navbar.component.html",
-        "hash": "9557565811781415991"
+        "hash": "10580219645563944338"
       },
       {
         "file": "src/app/core/navbar/navbar.component.scss",
@@ -225,6 +225,22 @@
       {
         "file": "src/app/core/navbar/navbar.component.ts",
         "hash": "17317013725678364685"
+      },
+      {
+        "file": "src/app/core/toast/toast.component.html",
+        "hash": "9245778872857835336"
+      },
+      {
+        "file": "src/app/core/toast/toast.component.scss",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "src/app/core/toast/toast.component.spec.ts",
+        "hash": "11921906936647097001"
+      },
+      {
+        "file": "src/app/core/toast/toast.component.ts",
+        "hash": "11996758521508591453"
       },
       {
         "file": "src/app/core/welcome/welcome.component.html",
@@ -260,7 +276,7 @@
       },
       {
         "file": "src/app/friends/add-friend/add-friend.component.html",
-        "hash": "10012687131509710237"
+        "hash": "1894348289574814534"
       },
       {
         "file": "src/app/friends/add-friend/add-friend.component.scss",
@@ -272,11 +288,11 @@
       },
       {
         "file": "src/app/friends/add-friend/add-friend.component.ts",
-        "hash": "15468755703083407796"
+        "hash": "7148326952483678489"
       },
       {
         "file": "src/app/friends/friends.component.html",
-        "hash": "3280458877637525312"
+        "hash": "14712759140575111356"
       },
       {
         "file": "src/app/friends/friends.component.scss",
@@ -288,7 +304,7 @@
       },
       {
         "file": "src/app/friends/friends.component.ts",
-        "hash": "4697418438042222175"
+        "hash": "1877035669237049443"
       },
       {
         "file": "src/app/google-auth/google-auth.component.html",
@@ -344,7 +360,7 @@
       },
       {
         "file": "src/app/models/friend.ts",
-        "hash": "5148074364335905514"
+        "hash": "9752046212627458477"
       },
       {
         "file": "src/app/models/shift.ts",
@@ -364,7 +380,7 @@
       },
       {
         "file": "src/app/services/calendar.service.ts",
-        "hash": "16588250117467146247"
+        "hash": "13644873405598639274"
       },
       {
         "file": "src/app/services/friends.service.spec.ts",
@@ -372,7 +388,15 @@
       },
       {
         "file": "src/app/services/friends.service.ts",
-        "hash": "12011701065015748146"
+        "hash": "2163488811699063013"
+      },
+      {
+        "file": "src/app/services/notification.service.spec.ts",
+        "hash": "11332629510805594483"
+      },
+      {
+        "file": "src/app/services/notification.service.ts",
+        "hash": "5202296697181023674"
       },
       {
         "file": "src/app/shift-editor-modal/shift-editor-modal.component.html",
@@ -464,7 +488,7 @@
       },
       {
         "file": "src/app/supabase.service.ts",
-        "hash": "2446974913926228289"
+        "hash": "12067764372318997062"
       },
       {
         "file": "src/assets/.gitkeep",

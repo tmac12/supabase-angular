@@ -196,6 +196,13 @@ export class SupabaseService {
 
   /** Friends */
 
+  updateFriendShipStatus(id: string, status: string) {
+    const update = {
+      status,
+    };
+    return this.supabase.from('friends').update(update).eq('id', id);
+  }
+
   updateFriend(friendUid: string) {
     const update = {
       owner_id: this._session?.user.id,

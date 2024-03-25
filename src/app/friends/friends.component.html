@@ -1,7 +1,7 @@
 <app-add-friend></app-add-friend>
 <!-- <div>{{ friends() | json }}</div> -->
 <h1>All Friends</h1>
-<div>{{ friendsVm() | json }}</div>
+<!-- <div>{{ friendsVm() | json }}</div> -->
 
 <div class="overflow-x-auto">
   <table class="table">
@@ -55,8 +55,18 @@
         <th>
           @if(item.isOwner){ @switch (item.status) { @case ('pending') {
           <div>
-            <button class="btn btn-success btn-xs">ACCEPT</button>
-            <button class="btn btn-error btn-xs">DECLINE</button>
+            <button
+              class="btn btn-success btn-xs"
+              (click)="acceptFriendship(item.id)"
+            >
+              ACCEPT
+            </button>
+            <button
+              class="btn btn-error btn-xs"
+              (click)="declineFriendShip(item.id)"
+            >
+              DECLINE
+            </button>
           </div>
           } } }
         </th>

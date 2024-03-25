@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { SupabaseService } from '../supabase.service';
 import { from } from 'rxjs';
-import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +10,18 @@ export class FriendsService {
   friendRequests = this.supabase.friendRequests;
 
   constructor() {}
+
+  public acceptFriendShip(friendTableId: string) {
+    return from(
+      this.supabase.updateFriendShipStatus(friendTableId, 'accepted')
+    );
+  }
+
+  public declineFriendShip(friendTableId: string) {
+    return from(
+      this.supabase.updateFriendShipStatus(friendTableId, 'declined')
+    );
+  }
 
   public addFriend(friendId: string) {
     console.log('add friend');
