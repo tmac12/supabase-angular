@@ -1,12 +1,11 @@
 import { Component, computed, inject } from '@angular/core';
 import { AddFriendComponent } from './add-friend/add-friend.component';
 import { FriendsService } from '../services/friends.service';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { computedAsync } from 'ngxtension/computed-async';
 import { JsonPipe } from '@angular/common';
-import { map, startWith } from 'rxjs';
-import { PostgrestSingleResponse } from '@supabase/supabase-js';
+import { map } from 'rxjs';
 import { Friend } from '../models/friend';
+import { AccountService } from '../account/account.service';
 
 @Component({
   selector: 'app-friends',
@@ -17,24 +16,21 @@ import { Friend } from '../models/friend';
 })
 export default class FriendsComponent {
   friendService = inject(FriendsService);
+  accountService = inject(AccountService);
 
   //friends$ = toSignal(this.friendService.getFriends());
-  friends = computedAsync(() => this.friendService.getFriendPromise(), {
-    initialValue: [],
-  });
+  // friends = computedAsync(() => this.friendService.getFriendPromise(), {
+  //   initialValue: [],
+  // });
 
   allFriends = computedAsync(
     () =>
       this.friendService.getAllFriends().pipe(
-        // startWith([] as Friend[]),
-
-        // map((friends: Friend[] | PostgrestResponseFailure) => {
         map((friendsResponse) => {
           if (friendsResponse.error) {
             console.error('Error fetching friends', friendsResponse.error);
             return [] as Friend[];
           }
-
           let uniqueIds = new Set();
           const friends = friendsResponse.data;
           if (!Array.isArray(friends)) return [];
@@ -51,6 +47,22 @@ export default class FriendsComponent {
       initialValue: [],
     }
   );
+
+  //add isOwner field
+  friendsVm = computed(() => {
+    const friends = this.allFriends();
+    if (!friends) {
+      return [];
+    }
+
+    const userId = this.accountService.userId();
+    return friends.map((friend) => {
+      return {
+        ...friend,
+        isOwner: friend.owner_id === userId,
+      };
+    });
+  });
 
   // allFriendsData = computed(() => {
   //   const response = this.allFriends();

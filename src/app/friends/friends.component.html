@@ -1,8 +1,7 @@
-<p>friends works!</p>
 <app-add-friend></app-add-friend>
 <!-- <div>{{ friends() | json }}</div> -->
 <h1>All Friends</h1>
-<!-- <div>{{ allFriends() | json }}</div> -->
+<div>{{ friendsVm() | json }}</div>
 
 <div class="overflow-x-auto">
   <table class="table">
@@ -14,13 +13,13 @@
             <input type="checkbox" class="checkbox" />
           </label>
         </th>
-        <th>owner_id</th>
-        <th>status</th>
+        <th>Email</th>
+        <th>Status</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      @if (allFriends()) { @for (item of allFriends(); track $index) {
+      @if (friendsVm()) { @for (item of friendsVm(); track $index) {
       <!-- row  -->
       <tr>
         <th>
@@ -54,24 +53,15 @@
           } }
         </td>
         <th>
-          @switch (item.status) { @case ('pending') {
+          @if(item.isOwner){ @switch (item.status) { @case ('pending') {
           <div>
             <button class="btn btn-success btn-xs">ACCEPT</button>
             <button class="btn btn-error btn-xs">DECLINE</button>
           </div>
-          } }
+          } } }
         </th>
       </tr>
       } }
     </tbody>
-    <!-- foot -->
-    <tfoot>
-      <tr>
-        <th></th>
-        <th>owner_id</th>
-        <th>status</th>
-        <th></th>
-      </tr>
-    </tfoot>
   </table>
 </div>

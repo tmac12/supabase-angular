@@ -13,7 +13,6 @@ import { BehaviorSubject } from 'rxjs';
 import { Shift } from './models/shift';
 import { CalendarEvent } from './models/calendarEvent';
 import { Friend } from './models/friend';
-import { NotificationService } from './services/notification.service';
 
 export interface Profile {
   id?: string;
@@ -218,8 +217,7 @@ export class SupabaseService {
    * @returns
    */
   getAllFriends() {
-    const res = this.supabase.from('friends').select().returns<Friend[]>();
-    return res;
+    return this.supabase.from('friends').select().returns<Friend[]>();
   }
 
   /**
