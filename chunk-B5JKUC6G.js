@@ -1,0 +1,1 @@
+import{Ob as r,P as e,Rb as a,V as n}from"./chunk-46NUIZ3Q.js";var l=(()=>{let t=class t{constructor(){this.supabase=n(a),this.isAuthenticated=r(()=>this.supabase.sessionSignal()!=null)}signInWithEmail(s){return this.supabase.signIn(s)}};t.\u0275fac=function(o){return new(o||t)},t.\u0275prov=e({token:t,factory:t.\u0275fac,providedIn:"root"});let i=t;return i})();export{l as a};
