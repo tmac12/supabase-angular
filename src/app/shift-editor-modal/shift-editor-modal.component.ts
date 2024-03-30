@@ -30,7 +30,7 @@ export class ShiftEditorModalComponent {
   selectedShift = computed(() => this.shiftSelect().selectedValue());
   calendarService = inject(CalendarService);
   friendService = inject(FriendsService);
-  friends = this.friendService.friendsSignal;
+  friendsWithoutOwner = this.friendService.friendsWithoutOwnerSignal;
 
   constructor() {
     effect(() => {
@@ -50,7 +50,7 @@ export class ShiftEditorModalComponent {
     const startTimestamp = this.currentDate();
     console.log('save ' + JSON.stringify(currentShift));
     if (currentShift && startTimestamp) {
-      const sharedFriends = this.friends().filter((friend) => !friend.isOwner);
+      const sharedFriends = this.friendsWithoutOwner();
       //convert sharedFriends to string with id of friends comma separated
       const sharedFriendsString = sharedFriends
         .map((friend) => friend.owner_id)
