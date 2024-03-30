@@ -1,4 +1,4 @@
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { SupabaseService } from '../supabase.service';
 import { from, tap } from 'rxjs';
 import { Friend, FriendDto } from '../models/friend';
@@ -10,6 +10,13 @@ export class FriendsService {
   supabase = inject(SupabaseService);
   friendRequests = this.supabase.friendRequests;
   friendsSignal = signal<FriendDto[]>([]);
+  friendsWithoutOwnerSignal = computed(() => {
+    return this.friendsSignal().filter((friend) => !friend.isOwner);
+  });
+
+  friendsCount = computed(() => {
+    return this.friendsWithoutOwnerSignal().length;
+  });
 
   constructor() {}
 

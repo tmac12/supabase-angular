@@ -59,4 +59,5 @@ To get google calendars use project [xeora-backend](https://github.com/tmac12/xe
 - [ ] Refactor with declarative code
 - [ ] Add private flag to calendar event
 - [ ] Handle click on existing event with action DELETE, UPDATE.
-- 
+- [ ] Make only 1 request to get friends. Save to signal friends count, friends not owner, etc.
+- [x] Show friends count via new signal
