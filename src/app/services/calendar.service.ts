@@ -36,7 +36,11 @@ export class CalendarService {
     this.supabase.unsubscribeEventChanges();
   }
 
-  saveShiftToCalendar(shift: Shift, startDate: Date) {
+  saveShiftToCalendar(
+    shift: Shift,
+    startDate: Date,
+    sharedFriends: string | undefined
+  ) {
     const newEvent: CalendarEvent = {
       created_at: new Date(),
       start_timestamp: startDate,
@@ -44,7 +48,7 @@ export class CalendarService {
       shift_id: shift.id,
       title: shift.name,
       id: undefined,
-      shared_with: undefined,
+      shared_with: sharedFriends,
       owner_id: undefined,
     };
 

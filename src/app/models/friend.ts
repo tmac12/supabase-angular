@@ -5,3 +5,7 @@ export interface Friend {
   status: string;
   email: string;
 }
+
+export interface FriendDto extends Friend {
+  isOwner: boolean;
+}

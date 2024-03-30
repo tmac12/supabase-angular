@@ -1,6 +1,7 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { SupabaseService } from '../supabase.service';
-import { from } from 'rxjs';
+import { from, tap } from 'rxjs';
+import { Friend, FriendDto } from '../models/friend';
 
 @Injectable({
   providedIn: 'root',
@@ -8,6 +9,7 @@ import { from } from 'rxjs';
 export class FriendsService {
   supabase = inject(SupabaseService);
   friendRequests = this.supabase.friendRequests;
+  friendsSignal = signal<FriendDto[]>([]);
 
   constructor() {}
 
@@ -34,6 +36,29 @@ export class FriendsService {
 
   public getAllFriends() {
     return from(this.supabase.getAllFriends());
+  }
+
+  public async getAllFriendsPromise(ownerId: string | undefined) {
+    const { data, error } = await this.supabase.getAllFriends();
+    if (error) {
+      console.error(error);
+      this.friendsSignal.set([]);
+      return;
+    }
+
+    if (data) {
+      console.log('Friends found');
+      const friends = data.map((friend: Friend) => {
+        return {
+          ...friend,
+          isOwner: friend.owner_id === ownerId,
+        };
+      });
+      this.friendsSignal.set(friends);
+    } else {
+      console.log('No friends found');
+      this.friendsSignal.set([]);
+    }
   }
 
   public getAllOwnerFriends() {

@@ -12,6 +12,7 @@ import { ShiftSelectComponent } from '../shifts/shift-select/shift-select.compon
 import { ShiftPreviewComponent } from '../shifts/shift-preview/shift-preview.component';
 import { CalendarService } from '../services/calendar.service';
 import { DatePipe } from '@angular/common';
+import { FriendsService } from '../services/friends.service';
 
 @Component({
   selector: 'app-shift-editor-modal',
@@ -28,6 +29,8 @@ export class ShiftEditorModalComponent {
   isVisible = model(false);
   selectedShift = computed(() => this.shiftSelect().selectedValue());
   calendarService = inject(CalendarService);
+  friendService = inject(FriendsService);
+  friends = this.friendService.friendsSignal;
 
   constructor() {
     effect(() => {
@@ -46,8 +49,18 @@ export class ShiftEditorModalComponent {
     const currentShift = this.selectedShift();
     const startTimestamp = this.currentDate();
     console.log('save ' + JSON.stringify(currentShift));
-    if (currentShift && startTimestamp)
-      this.calendarService.saveShiftToCalendar(currentShift, startTimestamp);
+    if (currentShift && startTimestamp) {
+      const sharedFriends = this.friends().filter((friend) => !friend.isOwner);
+      //convert sharedFriends to string with id of friends comma separated
+      const sharedFriendsString = sharedFriends
+        .map((friend) => friend.owner_id)
+        .join(',');
+      this.calendarService.saveShiftToCalendar(
+        currentShift,
+        startTimestamp,
+        sharedFriendsString
+      );
+    }
 
     this.closeDialog();
   }

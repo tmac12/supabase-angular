@@ -15,6 +15,7 @@ import { WelcomeComponent } from '../welcome/welcome.component';
 import { FriendsService } from '../../services/friends.service';
 import { ToastComponent } from '../toast/toast.component';
 import { NotificationService } from '../../services/notification.service';
+import { AccountService } from '../../account/account.service';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +33,7 @@ import { NotificationService } from '../../services/notification.service';
 export default class HomeComponent implements OnDestroy {
   shiftService = inject(ShiftService);
   private readonly friendService = inject(FriendsService);
+  private readonly accountService = inject(AccountService);
   friendRequest = this.friendService.friendRequests;
   private readonly notificationService = inject(NotificationService);
   notificationMsg = this.notificationService.message;
@@ -45,6 +47,20 @@ export default class HomeComponent implements OnDestroy {
       return shifts.length > 0 ? false : true;
     }
     return true;
+  });
+
+  userId = this.accountService.userId;
+  allFriendsPromise = computed(() => {
+    const internalUserId = this.userId();
+    if (internalUserId) {
+      this.friendService.getAllFriendsPromise(internalUserId).then((res) => {
+        console.log('Friends fetched');
+      });
+    }
+  });
+
+  effectFriends = effect(() => {
+    this.allFriendsPromise();
   });
 
   constructor() {

@@ -52,10 +52,11 @@ To get google calendars use project [xeora-backend](https://github.com/tmac12/xe
         - https://supabase.com/docs/guides/functions/examples/send-emails
         - https://www.reddit.com/r/Supabase/comments/187s9em/what_is_the_best_way_to_send_a_really_nice/
         - https://bejamas.io/blog/send-emails-supabase-edge-functions-database-triggers/
-- [ ] Share calendar with other contacts
+- [x] Share calendar with other contacts
 - [ ] Create a logo
 - [ ] Get only current months events
 - [ ] Move accountService on a shared component
 - [ ] Refactor with declarative code
 - [ ] Add private flag to calendar event
 - [ ] Handle click on existing event with action DELETE, UPDATE.
+- 
