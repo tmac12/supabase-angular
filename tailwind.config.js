@@ -22,5 +22,41 @@ module.exports = {
     },
   },
   plugins: [require("daisyui")],
+  // config docs: https://daisyui.com/docs/config/
+  daisyui: {
+    themes: [
+      'light', 
+      'dark',
+    
+     {
+       'cupcake':{
+          ...require("daisyui/src/theming/themes")["cupcake"],
+          mytheme: {
+              
+            "primary": "#2563eb",
+                    
+            "secondary": "#ff9200",
+                    
+            "accent": "#607e00",
+                    
+            "neutral": "#0b0e0a",
+                    
+            "base-100": "#111827",
+                    
+            "info": "#00adc4",
+                    
+            "success": "#719600",
+                    
+            "warning": "#ff9e00",
+                    
+            "error": "#cb0f48",
+          "--rounded-btn": "0rem"
+        }
+     }
+    }
+    
+    
+    ],
+  },
 }
 
