@@ -50,7 +50,7 @@ module.exports = {
             "warning": "#ff9e00",
                     
             "error": "#cb0f48",
-          "--rounded-btn": "0rem"
+            "--rounded-btn": "0rem" // border radius rounded-btn utility class, used in buttons and similar element
         }
      }
     }
