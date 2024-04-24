@@ -1,7 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
 import { AddFriendComponent } from './add-friend/add-friend.component';
 import { FriendsService } from '../services/friends.service';
-import { computedAsync } from 'ngxtension/computed-async';
+import { derivedAsync } from 'ngxtension/derived-async';
 import { JsonPipe } from '@angular/common';
 import { first, map } from 'rxjs';
 import { Friend } from '../models/friend';
@@ -19,11 +19,11 @@ export default class FriendsComponent {
   accountService = inject(AccountService);
 
   //friends$ = toSignal(this.friendService.getFriends());
-  // friends = computedAsync(() => this.friendService.getFriendPromise(), {
+  // friends = derivedAsync(() => this.friendService.getFriendPromise(), {
   //   initialValue: [],
   // });
 
-  allFriends = computedAsync(
+  allFriends = derivedAsync(
     () =>
       this.friendService.getAllFriends().pipe(
         map((friendsResponse) => {
